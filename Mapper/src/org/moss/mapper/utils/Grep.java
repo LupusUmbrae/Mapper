@@ -7,24 +7,36 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grep {
+import org.junit.internal.matchers.IsCollectionContaining;
 
-	public static List<String> grepFile(String regex, File file)
-			throws IOException {
-		ArrayList<String> foundStrings = new ArrayList<String>();
-		FileReader in = new FileReader(file);
-		BufferedReader read = new BufferedReader(in);
-		String line;
-		while ((line = read.readLine()) != null) {
-			if (line.matches(regex)) {
-				foundStrings.add(line);
-			}
-		}
+public class Grep
+{
 
-		return foundStrings;
-	}
-	
-	public static boolean grepString(String regex, String string){
-		return string.matches(regex);
-	}
+    public static List<String>
+            grepFile(String regex, File file) throws IOException
+    {
+        ArrayList<String> foundStrings = new ArrayList<String>();
+        BufferedReader read = new BufferedReader(new FileReader(file));
+        String line;
+        while ((line = read.readLine()) != null)
+        {
+            if (line.matches(regex) && !isComment(line))
+            {
+                foundStrings.add(line);
+            }
+        }
+        read.close();
+
+        return foundStrings;
+    }
+
+    public static boolean grepString(String regex, String string)
+    {
+        return string.matches(regex);
+    }
+
+    private static boolean isComment(String line)
+    {
+        return line.matches("\\s*[//|\\*].*");
+    }
 }

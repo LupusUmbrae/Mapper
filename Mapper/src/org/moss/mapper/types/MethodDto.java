@@ -1,6 +1,6 @@
 package org.moss.mapper.types;
 
-public class MethodDTO {
+public class MethodDto {
 
 	private String methodName;
 	
@@ -8,7 +8,7 @@ public class MethodDTO {
 	
 	private AccessorEnum accessorType;
 	
-	public MethodDTO() {
+	public MethodDto() {
 		// TODO Auto-generated constructor stub
 	}
 }
